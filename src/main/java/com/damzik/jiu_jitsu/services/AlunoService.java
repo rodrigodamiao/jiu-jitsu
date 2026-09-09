@@ -4,6 +4,7 @@ import com.damzik.jiu_jitsu.dtos.request.AlunoRequest;
 import com.damzik.jiu_jitsu.dtos.request.AlunoUpdateRequest;
 import com.damzik.jiu_jitsu.dtos.response.AlunoResponse;
 import com.damzik.jiu_jitsu.entities.Aluno;
+import com.damzik.jiu_jitsu.enums.Faixa;
 import com.damzik.jiu_jitsu.repositories.AlunoRepository;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +29,21 @@ public class AlunoService {
         return alunoRepository.findById(id)
                 .map(AlunoResponse::new)
                 .orElseThrow(() -> new RuntimeException("Aluno de id %d não encontrado".formatted(id)));
+    }
+
+    // Buscar aluno por faixa
+    public List<AlunoResponse> findAlunoByFaixa(Faixa faixa){
+        return alunoRepository.findByFaixa(faixa).stream().map(AlunoResponse::new).toList();
+    }
+
+    // Buscar aluno por nome
+    public List<AlunoResponse> findAlunoByNome(String nome){
+        return alunoRepository.findByNomeContainingIgnoreCase(nome).stream().map(AlunoResponse::new).toList();
+    }
+
+    // Buscar por alunos com matricula ativa
+    public List<AlunoResponse> findAlunosMatriculados(Boolean matricula){
+        return alunoRepository.findByMatricula(matricula).stream().map(AlunoResponse::new).toList();
     }
 
     // Matricular aluno

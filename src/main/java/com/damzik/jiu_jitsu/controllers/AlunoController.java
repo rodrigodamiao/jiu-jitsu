@@ -3,6 +3,7 @@ package com.damzik.jiu_jitsu.controllers;
 import com.damzik.jiu_jitsu.dtos.request.AlunoRequest;
 import com.damzik.jiu_jitsu.dtos.request.AlunoUpdateRequest;
 import com.damzik.jiu_jitsu.dtos.response.AlunoResponse;
+import com.damzik.jiu_jitsu.enums.Faixa;
 import com.damzik.jiu_jitsu.services.AlunoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +23,13 @@ public class AlunoController {
 
     // Listar alunos
     @GetMapping
-    public ResponseEntity<List<AlunoResponse>> listarAlunos(){
+    public ResponseEntity<List<AlunoResponse>> listarAlunos(@RequestParam(required = false)Faixa faixa,
+                                                            @RequestParam(required = false) String nome,
+                                                            @RequestParam(required = false) Boolean matricula){
+
+        if(faixa != null) return ResponseEntity.ok().body(alunoService.findAlunoByFaixa(faixa));
+        if(nome != null) return ResponseEntity.ok().body(alunoService.findAlunoByNome(nome));
+        if(matricula != null) return ResponseEntity.ok().body(alunoService.findAlunosMatriculados(matricula));
         return ResponseEntity.ok().body(alunoService.listarAlunos());
     }
 
