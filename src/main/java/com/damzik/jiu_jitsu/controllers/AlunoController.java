@@ -63,6 +63,12 @@ public class AlunoController {
         return ResponseEntity.ok().body(alunoService.reativarMatricula(id));
     }
 
+    // Registrar Presença (check-in)
+    @PatchMapping("/{id}/registrar-presenca")
+    public ResponseEntity<AlunoResponse> registrarPresenca(@PathVariable Long id){
+        return ResponseEntity.ok().body(alunoService.registrarPresenca(id));
+    }
+
     // Deletar Aluno
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletarAluno(@PathVariable Long id){

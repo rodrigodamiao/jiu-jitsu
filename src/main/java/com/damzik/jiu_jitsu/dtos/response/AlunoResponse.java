@@ -2,13 +2,19 @@ package com.damzik.jiu_jitsu.dtos.response;
 
 import com.damzik.jiu_jitsu.entities.Aluno;
 import com.damzik.jiu_jitsu.enums.Faixa;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import java.time.LocalDateTime;
 
 public record AlunoResponse(
         Long id,
         String nome,
         int idade,
         Faixa faixa,
-        boolean matricula
+        boolean matricula,
+        int totalPresencas,
+        @JsonFormat(pattern = "dd/MM/yyyy - HH:mm:ss")
+        LocalDateTime dataUltimoTreino
 ) {
     public AlunoResponse(Aluno aluno) {
         this(
@@ -16,7 +22,9 @@ public record AlunoResponse(
                 aluno.getNome(),
                 aluno.getIdade(),
                 aluno.getFaixa(),
-                aluno.isMatricula()
+                aluno.isMatricula(),
+                aluno.getTotalPresencas(),
+                aluno.getDataUltimoTreino()
         );
     }
 }

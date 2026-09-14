@@ -8,6 +8,7 @@ import com.damzik.jiu_jitsu.enums.Faixa;
 import com.damzik.jiu_jitsu.repositories.AlunoRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -87,6 +88,21 @@ public class AlunoService {
         }
 
         aluno.setMatricula(true);
+
+        return new AlunoResponse(alunoRepository.save(aluno));
+    }
+
+    // Registrar presença no treino (check-in)
+    public AlunoResponse registrarPresenca(Long id){
+        Aluno aluno = alunoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Aluno de id %d não encontrado".formatted(id)));
+
+        if(!aluno.isMatricula()){
+            throw new IllegalStateException("Matricula inativa. Aluno não pode realizar check-in");
+        }
+
+        aluno.setTotalPresencas(aluno.getTotalPresencas() + 1);
+        aluno.setDataUltimoTreino(LocalDateTime.now());
 
         return new AlunoResponse(alunoRepository.save(aluno));
     }
