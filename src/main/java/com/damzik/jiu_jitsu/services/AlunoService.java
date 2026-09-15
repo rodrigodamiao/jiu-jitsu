@@ -59,6 +59,7 @@ public class AlunoService {
 
         if(alunoUpdateRequest.nome() != null && !alunoUpdateRequest.nome().isBlank()) aluno.setNome(alunoUpdateRequest.nome());
         if(alunoUpdateRequest.idade() != null) aluno.setIdade(alunoUpdateRequest.idade());
+        if(alunoUpdateRequest.peso() != null) aluno.setPeso(alunoUpdateRequest.peso());
         if(alunoUpdateRequest.faixa() != null) aluno.setFaixa(alunoUpdateRequest.faixa());
 
         return new AlunoResponse(alunoRepository.save(aluno));

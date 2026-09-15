@@ -16,6 +16,8 @@ public class Aluno {
 
     private int idade;
 
+    private Double peso;
+
     @Enumerated(EnumType.STRING)
     private Faixa faixa;
 
@@ -28,10 +30,11 @@ public class Aluno {
     public Aluno() {
     }
 
-    public Aluno(Long id, String nome, int idade, Faixa faixa, boolean matricula, int totalPresencas, LocalDateTime dataUltimoTreino) {
+    public Aluno(Long id, String nome, int idade, Double peso, Faixa faixa, boolean matricula, int totalPresencas, LocalDateTime dataUltimoTreino) {
         this.id = id;
         this.nome = nome;
         this.idade = idade;
+        this.peso = peso;
         this.faixa = faixa;
         this.matricula = matricula;
         this.totalPresencas = totalPresencas;
@@ -60,6 +63,14 @@ public class Aluno {
 
     public void setIdade(int idade) {
         this.idade = idade;
+    }
+
+    public Double getPeso() {
+        return peso;
+    }
+
+    public void setPeso(Double peso) {
+        this.peso = peso;
     }
 
     public Faixa getFaixa() {
