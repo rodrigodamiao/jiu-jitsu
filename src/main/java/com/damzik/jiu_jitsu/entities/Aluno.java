@@ -83,10 +83,6 @@ public class Aluno {
         return categoriaPeso;
     }
 
-    public void setCategoriaPeso(CategoriaPeso categoriaPeso) {
-        this.categoriaPeso = categoriaPeso;
-    }
-
     public Faixa getFaixa() {
         return faixa;
     }
