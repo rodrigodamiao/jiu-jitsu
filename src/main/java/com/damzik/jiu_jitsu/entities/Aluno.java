@@ -1,5 +1,6 @@
 package com.damzik.jiu_jitsu.entities;
 
+import com.damzik.jiu_jitsu.enums.CategoriaPeso;
 import com.damzik.jiu_jitsu.enums.Faixa;
 import jakarta.persistence.*;
 
@@ -19,6 +20,9 @@ public class Aluno {
     private Double peso;
 
     @Enumerated(EnumType.STRING)
+    private CategoriaPeso categoriaPeso;
+
+    @Enumerated(EnumType.STRING)
     private Faixa faixa;
 
     private boolean matricula;
@@ -30,11 +34,12 @@ public class Aluno {
     public Aluno() {
     }
 
-    public Aluno(Long id, String nome, int idade, Double peso, Faixa faixa, boolean matricula, int totalPresencas, LocalDateTime dataUltimoTreino) {
+    public Aluno(Long id, String nome, int idade, Double peso, CategoriaPeso categoriaPeso, Faixa faixa, boolean matricula, int totalPresencas, LocalDateTime dataUltimoTreino) {
         this.id = id;
         this.nome = nome;
         this.idade = idade;
         this.peso = peso;
+        this.categoriaPeso = CategoriaPeso.dePeso(peso);
         this.faixa = faixa;
         this.matricula = matricula;
         this.totalPresencas = totalPresencas;
@@ -71,6 +76,15 @@ public class Aluno {
 
     public void setPeso(Double peso) {
         this.peso = peso;
+        this.categoriaPeso = CategoriaPeso.dePeso(peso);
+    }
+
+    public CategoriaPeso getCategoriaPeso() {
+        return categoriaPeso;
+    }
+
+    public void setCategoriaPeso(CategoriaPeso categoriaPeso) {
+        this.categoriaPeso = categoriaPeso;
     }
 
     public Faixa getFaixa() {

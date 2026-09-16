@@ -13,4 +13,6 @@ public interface AlunoRepository extends JpaRepository<Aluno, Long> {
     List<Aluno> findByNomeContainingIgnoreCase(String nome);
 
     List<Aluno> findByMatricula(Boolean matricula);
+
+    List<Aluno> findByPesoBetweenAndMatriculaTrue(Double pesoMin, Double pesoMax);
 }

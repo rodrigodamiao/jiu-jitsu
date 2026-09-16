@@ -1,6 +1,7 @@
 package com.damzik.jiu_jitsu.dtos.response;
 
 import com.damzik.jiu_jitsu.entities.Aluno;
+import com.damzik.jiu_jitsu.enums.CategoriaPeso;
 import com.damzik.jiu_jitsu.enums.Faixa;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -11,6 +12,7 @@ public record AlunoResponse(
         String nome,
         int idade,
         Double peso,
+        CategoriaPeso categoriaPeso,
         Faixa faixa,
         boolean matricula,
         int totalPresencas,
@@ -23,6 +25,7 @@ public record AlunoResponse(
                 aluno.getNome(),
                 aluno.getIdade(),
                 aluno.getPeso(),
+                aluno.getCategoriaPeso(),
                 aluno.getFaixa(),
                 aluno.isMatricula(),
                 aluno.getTotalPresencas(),

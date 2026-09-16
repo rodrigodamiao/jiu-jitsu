@@ -4,6 +4,7 @@ import com.damzik.jiu_jitsu.dtos.request.AlunoRequest;
 import com.damzik.jiu_jitsu.dtos.request.AlunoUpdateRequest;
 import com.damzik.jiu_jitsu.dtos.response.AlunoResponse;
 import com.damzik.jiu_jitsu.entities.Aluno;
+import com.damzik.jiu_jitsu.enums.CategoriaPeso;
 import com.damzik.jiu_jitsu.enums.Faixa;
 import com.damzik.jiu_jitsu.repositories.AlunoRepository;
 import org.springframework.stereotype.Service;
@@ -45,6 +46,12 @@ public class AlunoService {
     // Buscar por alunos com matricula ativa
     public List<AlunoResponse> findAlunosMatriculados(Boolean matricula){
         return alunoRepository.findByMatricula(matricula).stream().map(AlunoResponse::new).toList();
+    }
+
+    // Buscar alunos por categoria
+    public List<AlunoResponse> findAlunosByCategoria(CategoriaPeso categoriaPeso){
+        return alunoRepository.findByPesoBetweenAndMatriculaTrue(categoriaPeso.getPesoMin(), categoriaPeso.getPesoMax())
+                .stream().map(AlunoResponse::new).toList();
     }
 
     // Matricular aluno
