@@ -6,6 +6,7 @@ import com.damzik.jiu_jitsu.dtos.response.AlunoResponse;
 import com.damzik.jiu_jitsu.enums.CategoriaPeso;
 import com.damzik.jiu_jitsu.enums.Faixa;
 import com.damzik.jiu_jitsu.services.AlunoService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -44,13 +45,13 @@ public class AlunoController {
 
     // Matricular Aluno
     @PostMapping
-    public ResponseEntity<AlunoResponse> matricularAluno(@RequestBody AlunoRequest alunoRequest){
+    public ResponseEntity<AlunoResponse> matricularAluno(@RequestBody @Valid AlunoRequest alunoRequest){
         return ResponseEntity.status(HttpStatus.CREATED).body(alunoService.matricularAluno(alunoRequest));
     }
 
     // Atualizar Aluno
     @PatchMapping("/{id}")
-    public ResponseEntity<AlunoResponse> atualizarAluno(@PathVariable Long id, @RequestBody AlunoUpdateRequest alunoUpdateRequest){
+    public ResponseEntity<AlunoResponse> atualizarAluno(@PathVariable Long id, @RequestBody @Valid AlunoUpdateRequest alunoUpdateRequest){
         return ResponseEntity.ok(alunoService.atualizarAluno(id, alunoUpdateRequest));
     }
 
